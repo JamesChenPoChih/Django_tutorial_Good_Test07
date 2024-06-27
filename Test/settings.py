@@ -111,9 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGES = (
-    ('en', _('English')),
-    ('zh-Hant', _('繁體中文')),
+    ('en', 'English'),
+    # ('zh-Hant', _('繁體中文')),
 )
+
 LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Taipei'
