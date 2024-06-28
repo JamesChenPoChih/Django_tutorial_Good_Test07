@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+<<<<<<< HEAD
 # from django.utils.translation import ugettext_lazy as _ # Old Version舊的版本
 # from django.utils.translation import gettext_lazy as _
 
+=======
+# from django.utils.translation import gettext_lazy as _
+>>>>>>> 4135a84b7b682fc3775e96212c037a292ba9f09c
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -126,6 +130,7 @@ LANGUAGES = (
     ('en', 'English'),
     # ('zh-Hant', _('繁體中文')),
 )
+
 LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Taipei'
@@ -149,6 +154,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media'
+<<<<<<< HEAD
 
 
 # 配置認證後端和模板：
@@ -198,3 +204,5 @@ LOGIN_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+=======
+>>>>>>> 4135a84b7b682fc3775e96212c037a292ba9f09c
