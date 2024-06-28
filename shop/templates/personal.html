@@ -7,10 +7,11 @@
             form.disabled = false
         }
     </script>
-        <a href="/">回首頁</a>
+        <!--回首頁 Back to Index-->
+        <a href="/">Back to Index</a>
 </head>
 <center>
-<label>帳號：{{ account }}</label><br>
+<label>Account：{{ account }}</label><br>
 <form method="POST">
 {% csrf_token %}
     <fieldset id="personal_edit_form" style="border:0;" disabled>

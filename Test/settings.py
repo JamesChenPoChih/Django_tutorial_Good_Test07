@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _ # Old Version舊的版本
+# from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = '+izy+qm^mwdze0jfl^^zq$wc9$hp@dhka&*686b!b#u1b*aokh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['140.112.252.182','127.0.0.1','192.168.1.194']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    # 其他應用程式
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    
+
+
 ]
 
 AUTH_USER_MODEL = 'shop.User'
@@ -51,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # FB, Google登入,添加這一行
 ]
 
 
@@ -59,7 +71,7 @@ ROOT_URLCONF = 'Test.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # FB, Goolge登入, 您的模板目錄
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,8 +123,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGES = (
-    ('en', _('English')),
-    ('zh-Hant', _('繁體中文')),
+    ('en', 'English'),
+    # ('zh-Hant', _('繁體中文')),
 )
 LANGUAGE_CODE = 'en'
 
@@ -130,5 +142,59 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media'
+
+
+# 配置認證後端和模板：
+# settings.py
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'  # 登入後的重定向URL
+
+# 配置設置：
+
+
+# Google SocialApp
+# Facebook SocialApp
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': ['profile', 'email'],
+#         'AUTH_PARAMS': {'access_type': 'online'},
+#         'CLIENT_ID': '308671843139-s8fur14ngm9j6aibg05vkji7uvi1cpnh.apps.googleusercontent.com',
+#         'SECRET': 'AIzaSyD8qzz7Jca9Sy6UL_t0_glUB3u1H6GzlNo',
+#     },
+#     'facebook': {
+#         'SCOPE': ['email'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'METHOD': 'oauth2',
+#         'CLIENT_ID': '7858315870858815',
+#         'SECRET': 'a392b9b4e6b4b78448e3fa327301920f',
+#     },
+# }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'CLIENT_ID': '308671843139-s8fur14ngm9j6aibg05vkji7uvi1cpnh.apps.googleusercontent.com',
+        'SECRET': 'AIzaSyD8qzz7Jca9Sy6UL_t0_glUB3u1H6GzlNo',
+    },
+}
+
+
+# Google, Facebook Login的登入setting
+LOGIN_REDIRECT_URL = '/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple, Inc</title>
+    <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <style>
+        /* Adjustments for the images */
+        .logo img {
+            width: 0.5cm;
+            height: 0.5cm;
+        }
+
+        .company-picture img {
+            width: 100%;
+            height: auto;
+        }
+
+        .social-media img {
+            width: 1cm;
+            height: 1cm;
+        }
+
+        /* Adjustments for the product list */
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            flex: 0 0 calc(25% - 20px); /* 4 items per row */
+            padding: 10px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Adjustments for Google Map */
+        .google-map iframe {
+            width: 50%;
+            height: 225px;
+        }
+
+        /* Styling for cart, login, and logout links */
+        .user-links {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .user-links a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Company Logo and Name -->
+    <div class="logo">
+        <img src="{% static "img/apple_logo.jpg" %}" alt="Apple Logo">
+        <h1>Apple, Inc</h1>
+    </div>
+    <!-- Slogan -->
+    <div class="slogan">
+        <p>We choose the best for you</p>
+    </div>
+    <!-- Cart, Login and Subtotal -->
+
+    <div class="user-links">
+        {% if mode == 0 %}
+        <!--註冊 Register-->
+        <a href="register">Register</a>
+        <a href="login">Login</a>
+        {% endif %}
+        {% if mode == 1 %}
+        <a href="{% url 'car' %}">Cart</a>
+        <a href="personal">Personal Info</a>
+        <a href="logout">Logout</a>
+        {% endif %}
+    </div>
+</header>
+
+<main>
+    <!-- Picture -->
+    <div class="company-picture">
+        <img src="{% static "img/company_picture.jpg" %}" alt="Company Picture">
+    </div>
+
+    <!-- Our Products -->
+    <h2>Our Products</h2>
+
+    <!-- Product List -->
+    <div class="product-list">
+        {% for product in product_list %}
+        <div class="product">
+            <a href="{% url 'product_detail' product_id=product.id %}">
+                <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                <p>Name: {{ product.product_name }}</p>
+                <p>Price: {{ product.product_price }}</p>
+                <p>Remain: {{ product.remain_product }}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Google Map -->
+    <div class="google-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3175.203587927465!2d-122.01219228475298!3d37.33169474494739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb6f1f07711b1%3A0x1ec09a2d0c42d75e!2sApple%20Park!5e0!3m2!1sen!2sus!4v1613492483747!5m2!1sen!2sus" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Contact Us -->
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <p>Phone: +123456789</p>
+        <p>Email: info@apple.com</p>
+        <div class="social-media">
+            <a href="#"><img src="{% static "img/instagram_icon.jpg" %}>

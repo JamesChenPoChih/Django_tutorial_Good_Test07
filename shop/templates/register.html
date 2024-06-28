@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-</head>
-<body>
-    <center>
-        <form method="POST" class="post-form">
-        {% csrf_token %}
-            <table border="1">
-               {{ form }}
-            </table>
-            <button type="submit">submit</button>
-        </form>
-    </center>
-</body>
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block content %}
+  <!-- Google and Facebook login links -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{% provider_login_url 'google' %}">使用Google帳號登入</a><br>
+    <!-- <a href="{% provider_login_url 'facebook' %}">使用Facebook帳號登入</a><br> -->
+  </div>
+
+  <h2>Register</h2>
+  <!-- Your registration form goes here -->
+
+  <center>
+    <form method="POST" class="post-form">
+      {% csrf_token %}
+      <table border="1">
+        {{ form }}
+      </table>
+      <button type="submit">submit</button>
+    </form>
+  </center>
+{% endblock %}

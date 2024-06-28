@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <head>
-    <a href="/">回首頁</a>
+    <!--回首頁 Back to Index-->
+    <a href="/">Back to Index</a>
 </head>
 
 <center>
 <form method="POST">
 {% csrf_token %}
-    <label for="username">帳號：</label>
+    <!--帳號 Account-->
+    <label for="username">Account：</label>
     <input type="text" name="username" required><br>
-    <label for="password">密碼：</label>
+    <!--密碼 Password-->
+    <label for="password">Password：</label>
+    <!--登入 Login-->
     <input type="password" name="password" required><br>
-    <button type="submit" >登入</button>
+    <button type="submit" >Login</button>
 </form>
 <!--
 {% if error_code == 1 %}

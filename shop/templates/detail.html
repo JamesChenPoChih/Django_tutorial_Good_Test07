@@ -1,5 +1,5 @@
 <head>
-    <a href="/">回首頁</a>
+    <a href="/">Back to Index</a>
 </head>
 {% if remain_code == 1 %}
 <script>alert("You are asking products more than its remain.")</script>
@@ -14,8 +14,10 @@
     <h3>Remain : {{ product.remain_product }}</h3>
     <form method="POST">
     {% csrf_token %}
-    <label for="book_count">數量</label>
+    <!--數量 Numbers-->
+    <label for="book_count">Numbers</label>
     <input type="number" name="book_count" required>
-    <button type="submit">加入購物車</button>
+    <!--加入購物車 Add to Cart--> 
+    <button type="submit">Add to Cart</button>
     </form>
 </center>

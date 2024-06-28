@@ -1,5 +1,9 @@
-from django.db import models
+# from django.db import models
 from django.contrib.auth.models import AbstractUser
+
+from django.db import models
+# from django.contrib.auth.models import User
+
 # Create your models here.
 from django.core.validators import RegexValidator
 from django.utils.html import format_html
@@ -33,12 +37,30 @@ class Product(models.Model):
             self.remain_product-=number
             self.save()
             return True
-class ShoppingCar(models.Model):
-    client = models.ForeignKey(User)
-    product = models.ForeignKey(Product)
-    count = models.IntegerField(default=0, validators=[MinValueValidator(1)])
-    def __str__(self):
-        return self.client.name + self.count + "products"
-    def price(self):
-        return self.product.product_price * self.count        
         
+# Old Version
+# class ShoppingCar(models.Model):
+
+#     client = models.ForeignKey(User, on_delete=models.CASCADE)
+#     product = models.ForeignKey(Product)
+#     count = models.IntegerField(default=0, validators=[MinValueValidator(1)])
+#     def __str__(self):
+#         return self.client.name + self.count + "products"
+#     def price(self):
+#         return self.product.product_price * self.count        
+
+
+# ChatGPT修正
+from django.core.validators import MinValueValidator
+
+class ShoppingCar(models.Model):
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    count = models.IntegerField(default=0, validators=[MinValueValidator(1)])
+    
+    def __str__(self):
+        return f"{self.client.name} - {self.count} products"  # 使用 f-string 进行字符串连接
+    
+    def price(self):
+        return self.product.product_price * self.count
+
